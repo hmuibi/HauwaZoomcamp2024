@@ -1,3 +1,4 @@
+#docker compose is a way to run multiple docker images
 services:
   pgdatabase:
     image: postgres:13
