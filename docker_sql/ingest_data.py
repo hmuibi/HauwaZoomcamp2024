@@ -34,7 +34,7 @@ def main(params):
     #engine.connect()
     #print(pd.io.sql.get_schema(df, name='yellow_taxi_data', con=engine))
 
-    df_iter = pd.read_csv(csv_name, iterator=True, chunksize=100000)
+    df_iter = pd.read_csv(csv_name, iterator=True, chunksize=100000, compression='gzip')
     df = next(df_iter)
 
     df.tpep_pickup_datetime = pd.to_datetime(df.tpep_pickup_datetime)
