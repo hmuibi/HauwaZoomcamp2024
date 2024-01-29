@@ -49,7 +49,7 @@ docker run -it \
 docker start pg-database
 docker start pgadmin-2
 
-    URL="https://github.com/DataTalksClub/nyc-tlc-data/releases/download/yellow/yellow_tripdata_2021-01.csv.gz"
+URL="https://github.com/DataTalksClub/nyc-tlc-data/releases/download/yellow/yellow_tripdata_2021-01.csv.gz"
 
 python ingest_data.py \
 --user=root \
@@ -91,4 +91,12 @@ python ingest_data.py \
   --db=ny_taxi \
   --table_name=yellow_taxi_trips \
   --url=${URL}
+
+  Run this then log in 
+
+  docker-compose up 
+
+  docker-compose down 
+
+  docker-compose up -d - running in detached mode
 
