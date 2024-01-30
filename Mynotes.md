@@ -100,3 +100,41 @@ python ingest_data.py \
 
   docker-compose up -d - running in detached mode
 
+  everytime you connect 
+  rerun docker compose
+  add server - Docker localhost 
+  pgdatabase root then root
+
+
+
+SELECT tpep_pickup_datetime, tpep_dropoff_datetime, 
+total_amount, 
+CONCAT(zpu."Borough", '/', zpu."Zone") AS "pickup_loc",
+CONCAT(zdo."Borough", '/', zpu."Zone") as "droppff_loc",
+DATE_tRUNC('DAY', tpep_dropoff_datetime),
+CAST(tpep_dropoff_datetime AS DATE)
+FROM public.yellow_taxi_data t join zones zpu
+on t."PULocationID" = zpu."LocationID" join zones zdo
+on t."PULocationID" = zdo."LocationID" 
+LIMIT 100
+
+
+
+SELECT 
+CAST(tpep_dropoff_datetime AS DATE) AS "DAY", --total_amount, 
+COUNT(1)
+FROM public.yellow_taxi_data t 
+GROUP BY CAST(tpep_dropoff_datetime AS DATE)
+
+
+SELECT tpep_pickup_datetime, tpep_dropoff_datetime, 
+total_amount,  "PULocationID", "DOLocationID"
+FROM public.yellow_taxi_data 
+WHERE "PULocationID" NOT IN 
+(SELECT "LocationID" FROM ZONES)
+LIMIT 100
+
+terraform fmt - heps to format everything. 
+terraform init 
+terraform plan
+terraform apply
