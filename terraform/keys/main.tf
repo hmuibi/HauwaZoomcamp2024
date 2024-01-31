@@ -9,15 +9,15 @@ terraform {
 
 provider "google" {
   # Configuration options
-  credentials = "/workspaces/HauwaZoomcamp2024/terraform/keys/my-creds.json"
-  project     = "just-program-411315"
-  region      = "us-central1"
+  credentials = file(var.credentials)
+  project     = var.project
+  region      = var.region
 }
 
 #here we are defining the resource and stating the type of resource we would like to create
-resource "google_storage_bucket" "demo-bucket" {
-  name          = "just-program-411315-terra-bucket"
-  location      = "US"
+resource "google_storage_bucket" "module1homework-bucket" {
+  name          = var.gcs_bucket_name
+  location      = var.location
   force_destroy = true
 
   lifecycle_rule {
@@ -28,4 +28,10 @@ resource "google_storage_bucket" "demo-bucket" {
       type = "AbortIncompleteMultipartUpload"
     }
   }
+}
+
+
+resource "google_bigquery_dataset" "demo_dataset" {
+  dataset_id = var.bq_dataset_name
+  location   = var.location
 }
